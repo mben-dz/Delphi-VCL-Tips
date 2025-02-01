@@ -72,7 +72,7 @@ https://github.com/user-attachments/assets/239d0eec-4666-4693-bec7-423902102045
 
 ## Closing Notes
 
-We hope this tip helps you improve your Delphi Android app development experience. Stay tuned for more tips!
+We hope this tip helps you improve your Delphi VCL app development experience. Stay tuned for more tips!
 
 Happy coding! 🚀
 
