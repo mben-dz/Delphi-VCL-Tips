@@ -1,82 +1,74 @@
 
-## 📚 Delphi Android Tips:
+## 📚 Delphi VCL Tips:
 
-Welcome to **Delphi Android Tips**, a plain-text guide with essential tips for building and improving Android apps using Delphi. This guide includes tips based on our previous discussions to help you solve specific issues.
+Welcome to **Delphi VCL Tips**, a plain-text guide with essential tips for building and improving VCL apps using Delphi. This guide includes tips based on our previous discussions to help you solve specific issues.
 
 ---
+## What’s New?
 
+- **Delphi Focus:** All content now focuses on Delphi VCL tips rather than Android.
+- **Curated Content:** Expect articles, code samples, and troubleshooting tips covering everything from UI optimizations to efficient component usage.
+- **Community Driven:** Contributions and feedback are welcome—feel free to open issues or submit pull requests.
+## Contributing
+
+Contributions are very welcome! Please check out the [CONTRIBUTING.md](CONTRIBUTING.md) file for details on how to get started. Whether you have a tip, a bug fix, or a documentation improvement, feel free to share it with the community.  
+  
 <details>
-<summary>Tip1: Fixing Stretched Splash Images (After using the ArtWork generator from Delphi IDE) 🌟</summary>
-
+<summary>Tip1: Improving GPControls(StyleControls) Rendering Performance 🌟</summary>
+ 
+**Author:** ![MBenDelphi](https://www.facebook.com/MBen.Delphi)  
+**Date:** [01/Febrary/2025]
 
  **Problem:**  
- If you've ever generated Android splash screen images using Delphi IDE and noticed they appear stretched,  
- here's a simple way to fix that and ensure your splash image is always centered without distortion.
+  If you're experiencing flickering, freezing, or slow rendering when using GPControls (especially with TscGPButton or similar controls from the StyleControls library) in your Delphi applications, try these tips!.
 
  **Solution:**  
- To fix the stretched splash images, follow these steps:
+ After experimenting with various optimization techniques—such as:
 
-==> **Create a custom splash image definition:**
+- Enabling double buffering  
+- Tweaking WM_PAINT/WM_ERASEBKGND handlers  
+- Integrating Direct2D for hardware acceleration  
 
-After building your project, go to the following paths where the splash screen files are generated:
-   ```xml
-      if your target android system is 64bit:
-      <YourProjectDirectory>\Android64\Debug\<YourProjectName>\res\drawable
-      <YourProjectDirectory>\Android64\Debug\<YourProjectName>\res\drawable-anydpi-v21  
-        or
-      <YourProjectDirectory>\Android\Debug\<YourProjectName>\res\drawable  
-      <YourProjectDirectory>\Android\Debug\<YourProjectName>\res\drawable-anydpi-v21   
-   ```
+I discovered a **simple yet effective solution**: **Embed your GPControls on a `TIKPageViewPage` (from the `TIKPageView` IMageKit Component).**
   
-1. **Copy both files** **`splash_image_def.xml | splash_image_def-v21.xml`** from this folder and paste
-it into a new directory in your project (e.g., **`<YourProjectDirectory>\res\theme`**).  
-  
-   1.2  **Open both files in Delphi IDE** and add the following line inside each file:  
-      ```pascal
-      android:scaleType="centerInside"
-      ```
-   1.3 **Deployment:**  
-         Go to Project > Deployment in Delphi IDE.
-      Select all configurations for your target system.
-      Click on the column header "Local Name" to sort the list by name.
-      Scroll down, find the default splash xml files, uncheck them, and replace them with your newly edited files.
-      Don’t forget to set the remote path for the new files according to the unchecked ones.
-       That’s it! **Clean&Rebuild** and deploy your project, and you’ll see your splash image properly centered on all devices without any stretching! 
+## Why This Works  
 
-**Finally,Modified splash_image_def.xml should look like this:**  
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android" android:opacity="opaque">
-  <item android:drawable="@color/splash_background" />
-  <item>
-      <bitmap
-          android:src="@drawable/splash_image"
-          android:antialias="true"
-          android:dither="true"
-          android:filter="true"
-          android:gravity="center"
-          android:scaleType="centerInside"
-          android:tileMode="disabled"/>
-  </item>
-</layer-list>
-```
-**Modified splash_image_def-v21.xml should look like this:**  
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@color/splash_background" />
-    <item
-        android:gravity="center"
-        android:scaleType="centerInside"
-        android:drawable="@drawable/splash_vector">
-    </item>
-</layer-list
- ```
-  
-  
-This should solve the stretching issue and provide a visually appealing splash screen for your users.
+- **Optimized Rendering Context:**  
+  `TIKPageViewPage` is designed with an optimized drawing surface and efficient buffering. This minimizes the cost of invalidation and redraw operations.
 
----
+- **Efficient Resource Management:**  
+  The page view pre-allocates and manages resources better than a standard form, reducing the overhead when rendering GPControls.
+
+- **Reduced Flicker and Overhead:**  
+  Better internal strategies for handling paint messages result in a smoother, more responsive UI.
+  
+
+## How to Implement
+
+1. **Integrate `TIKPageView` into Your Application:**  
+   - Add the `TIKPageView` component to your form.
+
+2. **Create a `TIKPageViewPage`:**  
+   - Within `TIKPageView`, create a new page (i.e., a `TIKPageViewPage`).
+
+3. **Place Your GPControls on the Page:**  
+   - Move all your GPControls (e.g., `TscGPButton` and others) from the main form onto the `TIKPageViewPage`.
+
+4. **Test the Performance:**  
+   - Run your application and observe a significant reduction in flickering and freezing during dynamic operations (like form resize).
+
+  
+## Final Thoughts
+
+This approach has dramatically improved the rendering speed in my applications—almost like magic! If you're facing similar issues with GPControls, give this method a try and enjoy the enhanced performance.
+
+Feel free to open an issue or submit a pull request if you have improvements or additional insights to share.
+
+Happy coding!
+
+https://github.com/user-attachments/assets/239d0eec-4666-4693-bec7-423902102045
+
+
 
 ## Closing Notes
 
