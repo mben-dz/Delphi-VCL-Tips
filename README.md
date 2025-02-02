@@ -12,11 +12,14 @@ Welcome to **Delphi VCL Tips**, a plain-text guide with essential tips for build
 ## Contributing
 
 Contributions are very welcome! Please check out the [CONTRIBUTING.md](CONTRIBUTING.md) file for details on how to get started. Whether you have a tip, a bug fix, or a documentation improvement, feel free to share it with the community.  
+
   
 <details>
 <summary>Tip1: Improving GPControls(StyleControls) Rendering Performance 🌟</summary>
  
 **Author:** [MBenDelphi](https://www.facebook.com/MBen.Delphi)  
+<a href="https://www.facebook.com/MBen.Delphi" target="_blank" rel="noopener noreferrer">Author: MBenDelphi</a>
+
 **Date:** [01/Febrary/2025]
 
  **Problem:**  
