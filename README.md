@@ -16,7 +16,7 @@ Contributions are very welcome! Please check out the [CONTRIBUTING.md](CONTRIBUT
 <details>
 <summary>Tip1: Improving GPControls(StyleControls) Rendering Performance 🌟</summary>
  
-**Author:** ![MBenDelphi](https://www.facebook.com/MBen.Delphi)  
+**Author:** [MBenDelphi](https://www.facebook.com/MBen.Delphi)  
 **Date:** [01/Febrary/2025]
 
  **Problem:**  
